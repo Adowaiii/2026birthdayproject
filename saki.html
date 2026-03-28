@@ -10,12 +10,12 @@
   <style>
     :root {
       --dk-blue:   #1E2875;
-      --dk-blue2:  #2D3A8C;
-      --md-blue:   #3949AB;
-      --yellow:    #FFD600;
+      --dk-blue2:  #4455dd;
+      --md-blue:   #2D3A8C;
+      --yellow:    #ffdd44;
       --yellow-lt: #FFF9C4;
       --yellow-md: #FFE566;
-      --pink:      #E91E63;
+      --pink:      #f65887;
       --pink-lt:   #FCE4EC;
       --pink-md:   #F48FB1;
       --bg:        #FFF8FB;
@@ -50,6 +50,13 @@
       border-bottom: 1.5px solid transparent;
       background-clip: padding-box;
       box-shadow: 0 1px 0 rgba(244,143,177,0.5), 0 4px 20px rgba(233,30,99,0.06);
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+    nav.nav--visible {
+      transform: translateY(0);
+      opacity: 1;
     }
     .nav-brand {
       font-family: 'Playfair Display', serif;
@@ -128,7 +135,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(233,30,99,0.85);
+      background: var(--dk-blue2);
       backdrop-filter: blur(8px);
       color: #fff;
       font-size: 0.78rem;
@@ -283,7 +290,7 @@
     .section-title .zh {
       display: block;
       font-family: 'Taipei Sans TC', sans-serif;
-      font-size: 0.52em; color: var(--text-lt);
+      font-size: 0.52em; color: var(--pink-md);
       font-weight: 400; margin-top: 0.35rem;
       letter-spacing: 0.05em;
     }
@@ -640,7 +647,8 @@
     .cross-nav-bubble {
       width: 56px; height: 56px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #FF8C42, #2C7BB6);
+      color:#fff;
+      background: linear-gradient(135deg, #ffbb00, #ff9900);
       box-shadow: 0 4px 20px rgba(255,140,66,0.40);
       display: flex; align-items: center; justify-content: center;
       cursor: pointer; border: 3px solid #fff;
@@ -663,11 +671,11 @@
     .cross-nav-bubble:hover .bubble-hint { opacity: 1; }
     .cross-nav-card {
       position: absolute; bottom: 68px; right: 0;
-      width: 230px; background: rgba(255,255,255,0.95);
+      width: 250px; background: rgba(255,255,255,0.95);
       backdrop-filter: blur(12px);
       border-radius: 20px; padding: 1.2rem 1.5rem;
       box-shadow: 0 8px 40px rgba(44,123,182,0.20);
-      border: 1.5px solid #FFD166;
+      border: 1.5px solid #FFBB00;
       opacity: 0; transform: translateY(10px) scale(0.95);
       pointer-events: none;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -675,19 +683,19 @@
     .cross-nav-card.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
     .cross-nav-card .card-title {
       font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #FF8C42; margin-bottom: 0.4rem;
+      text-transform: uppercase; color: #172487; margin-bottom: 0.4rem;
     }
     .cross-nav-card .card-name {
       font-family: 'Taipei Sans TC', sans-serif; font-size: 1.05rem; font-weight: 700;
-      color: #1A4F7A; margin-bottom: 1rem; line-height: 1.4;
+      color: #ff9900; margin-bottom: 1rem; line-height: 1.4;
     }
     .cross-nav-card .card-name em {
       display: block; font-style: normal; font-size: 0.75rem;
-      color: #FF8C42; font-weight: 600; margin-top: 0.1rem;
+      color: #FFBB00; font-weight: 600; margin-top: 0.1rem;
     }
     .cross-nav-card a.card-link {
       display: block; text-align: center; padding: 0.6rem 1rem;
-      background: linear-gradient(135deg, #FF8C42, #2C7BB6);
+      background: linear-gradient(135deg, #FFBB00, #ff9900);
       color: #fff; border-radius: 12px; text-decoration: none;
       font-weight: 800; font-size: 0.85rem; transition: opacity 0.2s;
     }
@@ -1027,6 +1035,7 @@
   <div class="nav-brand">𝄞 <span>天馬咲希</span> 生日茶會</div>
   <ul class="nav-links">
     <li><a href="#event" class="active">活動資訊</a></li>
+    <li><a href="celebration.html">賀圖・賀文</a></li>
     <li><a href="saki-gallery.html">相冊</a></li>
   </ul>
 </nav>
@@ -1056,9 +1065,9 @@
   <!-- floating text deco -->
   <div class="hero-deco" aria-hidden="true">
     <span class="deco">𝄞</span>
-    <span class="deco">🎀</span>
+    <span class="deco">❀</span>
+    <span class="deco">✿</span>
     <span class="deco">♡</span>
-    <span class="deco">★</span>
     <span class="deco">❀</span>
     <span class="deco">𝄞</span>
   </div>
@@ -1304,7 +1313,7 @@
     <div class="card-title">另一場茶會</div>
     <div class="card-name">
       天馬司生日茶會
-      <em>Tenma Tsukasa Birthday Tea Party</em>
+      <em>Tenma Tsukasa <br>  Birthday Tea Party</em>
     </div>
     <a href="tsukasa.html" class="card-link">前往司的茶會 →</a>
   </div>
@@ -1332,6 +1341,15 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav — show after scrolling past hero
+  (function () {
+    var nav = document.querySelector('nav');
+    function onScroll() {
+      nav.classList.toggle('nav--visible', window.scrollY > window.innerHeight * 0.6);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
 
   // Smooth scroll for nav links
   document.querySelectorAll('a[href^="#"]').forEach(a => {

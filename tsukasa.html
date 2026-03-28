@@ -12,7 +12,7 @@
       --blue:    #2C7BB6;
       --blue-lt: #7EC8E3;
       --blue-dk: #1A4F7A;
-      --yellow:  #FFD166;
+      --yellow:  #ffbb00;
       --yellow-lt: #FFF4C2;
       --orange:  #FF8C42;
       --orange-lt: #FFDBB5;
@@ -46,6 +46,13 @@
       backdrop-filter: blur(12px);
       border-bottom: 2px solid var(--yellow);
       box-shadow: 0 2px 12px rgba(44,123,182,0.10);
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+    nav.nav--visible {
+      transform: translateY(0);
+      opacity: 1;
     }
     .nav-brand {
       font-family: 'Playfair Display', serif;
@@ -607,7 +614,8 @@
     .cross-nav-bubble {
       width: 56px; height: 56px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #E91E63, #283593);
+      color:#fff;
+      background: linear-gradient(135deg, #ffdd44, #4455dd);
       box-shadow: 0 4px 20px rgba(233,30,99,0.40);
       display: flex;
       align-items: center;
@@ -621,7 +629,7 @@
     }
     .cross-nav-bubble:hover {
       transform: scale(1.1);
-      box-shadow: 0 8px 30px rgba(233,30,99,0.50);
+      box-shadow: 0 8px 30px rgba(67, 30, 233, 0.5);
     }
     .cross-nav-bubble .bubble-hint {
       position: absolute;
@@ -642,8 +650,8 @@
       position: absolute;
       bottom: 68px;
       right: 0;
-      width: 230px;
-      background: #fff;
+      width: 250px;
+      background: #ffffff;
       border-radius: 20px;
       padding: 1.2rem 1.5rem;
       box-shadow: 0 8px 40px rgba(40,53,147,0.20);
@@ -663,14 +671,14 @@
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #9C27B0;
+      color: #000;
       margin-bottom: 0.4rem;
     }
     .cross-nav-card .card-name {
       font-family: 'Taipei Sans TC', serif;
       font-size: 1.05rem;
       font-weight: 700;
-      color: #1A237E;
+      color: #4455dd;
       margin-bottom: 1rem;
       line-height: 1.4;
     }
@@ -678,7 +686,7 @@
       display: block;
       font-style: normal;
       font-size: 0.75rem;
-      color: #E91E63;
+      color: #ffdd44;
       font-weight: 600;
       margin-top: 0.1rem;
     }
@@ -686,8 +694,8 @@
       display: block;
       text-align: center;
       padding: 0.6rem 1rem;
-      background: linear-gradient(135deg, #E91E63, #283593);
-      color: #fff;
+      background: linear-gradient(135deg, #ffdd44, #4455dd);
+      color: #FFF;
       border-radius: 12px;
       text-decoration: none;
       font-weight: 800;
@@ -1032,6 +1040,7 @@
   <div class="nav-brand">✦ <span>天馬司</span> 生日茶會</div>
   <ul class="nav-links">
     <li><a href="#event" class="active">活動資訊</a></li>
+    <li><a href="celebration.html">賀圖・賀文</a></li>
     <li><a href="tsukasa-gallery.html">相冊</a></li>
   </ul>
 </nav>
@@ -1299,12 +1308,12 @@
     <div class="card-title">另一場茶會</div>
     <div class="card-name">
       天馬咲希生日茶會
-      <em>Tenma Saki Birthday Tea Party</em>
+      <em>Tenma Saki <br> Birthday Tea Party</em>
     </div>
     <a href="saki.html" class="card-link">前往咲希的茶會 →</a>
   </div>
   <div class="cross-nav-bubble" onclick="toggleCrossNav()">
-    🌸
+    ❀
     <span class="bubble-hint">咲希的茶會</span>
   </div>
 </div>
@@ -1327,6 +1336,15 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav — show after scrolling past hero
+  (function () {
+    var nav = document.querySelector('nav');
+    function onScroll() {
+      nav.classList.toggle('nav--visible', window.scrollY > window.innerHeight * 0.6);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
 
   // Smooth scroll for nav links
   document.querySelectorAll('a[href^="#"]').forEach(a => {

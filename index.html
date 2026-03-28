@@ -85,12 +85,12 @@
     }
     .card:hover { transform: translateY(-10px) scale(1.02); }
     .card--saki {
-      background: linear-gradient(145deg, #c2185b 0%, #E91E63 45%, #F06292 100%);
+      background: linear-gradient(145deg, #fa90ba 0%, #fd5eb5 45%, #f26fb7 100%);
       box-shadow: 0 12px 50px rgba(233,30,99,0.35);
     }
     .card--saki:hover { box-shadow: 0 20px 60px rgba(233,30,99,0.50); }
     .card--tsukasa {
-      background: linear-gradient(145deg, #1A4F7A 0%, #2C7BB6 45%, #5BA3D4 100%);
+      background: linear-gradient(145deg, #126ab3 0%, #4e9be3 45%, #5BA3D4 100%);
       box-shadow: 0 12px 50px rgba(44,123,182,0.35);
     }
     .card--tsukasa:hover { box-shadow: 0 20px 60px rgba(44,123,182,0.50); }
@@ -102,40 +102,34 @@
 
     /* ── EMBLEM ── */
     .card-emblem {
-      position: relative; width: 120px; height: 120px;
+      position: relative; width: 130px; height: 130px;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 2rem;
     }
-    .card-ring-outer {
-      position: absolute; inset: -12px; border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,0.12);
-      animation: spin-rev 6s linear infinite;
-    }
-    .card-ring {
+    /* decorative dashed circle — clearly ornamental, not a spinner */
+    .card-emblem::before {
+      content: '';
       position: absolute; inset: 0; border-radius: 50%;
-      border: 3px solid transparent; animation: spin 3s linear infinite;
+      border: 1.5px dashed rgba(255,255,255,0.30);
     }
-    .card--saki .card-ring {
-      border-top-color: rgba(255,255,255,0.9); border-right-color: rgba(255,214,0,0.6);
-      border-bottom-color: rgba(255,255,255,0.2); border-left-color: rgba(255,255,255,0.2);
-    }
-    .card--tsukasa .card-ring {
-      border-top-color: rgba(255,255,255,0.9); border-right-color: rgba(255,209,102,0.7);
-      border-bottom-color: rgba(255,255,255,0.2); border-left-color: rgba(255,255,255,0.2);
+    /* solid inner circle background */
+    .card-emblem::after {
+      content: '';
+      position: absolute; inset: 14px; border-radius: 50%;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.15);
     }
     .card-icon {
-      font-size: 3rem; line-height: 1;
-      animation: pulse 2.4s ease-in-out infinite;
-      text-shadow: 0 0 24px rgba(255,255,255,0.6);
+      position: relative; z-index: 1;
+      font-size: 3.4rem; line-height: 1;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3), 0 0 32px rgba(255,255,255,0.25);
     }
     .card--saki   .card-icon { color: #F8BBD0; }
     .card--tsukasa .card-icon { color: #B3E0F7; }
 
-    @keyframes spin     { to { transform: rotate(360deg); } }
-    @keyframes spin-rev { to { transform: rotate(-360deg); } }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.7; transform: scale(0.90); }
-      50%       { opacity: 1;   transform: scale(1.10); }
+    /* on hover, the emblem glows slightly */
+    .card:hover .card-emblem::after {
+      background: rgba(255,255,255,0.10);
     }
 
     /* ── CARD TEXT ── */
@@ -165,7 +159,10 @@
       transition: gap 0.2s, background 0.2s;
     }
     .card--tsukasa .card-cta {
-      background: rgba(255,209,102,0.22); border-color: rgba(255,209,102,0.4); color: #FFD166;
+      background: rgba(255,209,102,0.22); border-color: rgba(255,209,102,0.4); color: #ffbb00;
+    }
+    .card--saki .card-cta {
+      background: rgba(255,209,102,0.22); border-color: rgba(255,209,102,0.4); color: #ffdd44;
     }
     .card:hover .card-cta { gap: 0.8rem; background: rgba(255,255,255,0.28); }
     .card--tsukasa:hover .card-cta { background: rgba(255,209,102,0.38); }
@@ -203,8 +200,6 @@
       <!-- Saki -->
       <a class="card card--saki" href="saki.html">
         <div class="card-emblem">
-          <div class="card-ring-outer"></div>
-          <div class="card-ring"></div>
           <span class="card-icon">❀</span>
         </div>
         <div class="card-body">
@@ -220,8 +215,6 @@
       <!-- Tsukasa -->
       <a class="card card--tsukasa" href="tsukasa.html">
         <div class="card-emblem">
-          <div class="card-ring-outer"></div>
-          <div class="card-ring"></div>
           <span class="card-icon">✦</span>
         </div>
         <div class="card-body">
